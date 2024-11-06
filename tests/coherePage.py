@@ -1,13 +1,13 @@
 from playwright.sync_api import Page
+from conftest import config_data
 
 class CoherePage:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page,config: config_data):
         self.page = page
-        self.loginUrl = "https://dashboard.cohere.com/welcome/login"
-        self.chatUrl =  "https://dashboard.cohere.com/chat"
-        self.email_input_selector = "input[name='email']"
-        self.password_input_selector = "input[name='password']"
-        self.login_button_selector = "button[type='submit']"
+        self.loginUrl = config["cohere_url"]
+        self.chatUrl =  config["cohere_chat_url"]
+        self.email = config["cohere_email"]
+        self.password = config["cohere_password"]
 
     def navigate_to_login(self):
         self.page.goto(self.loginUrl)
@@ -15,9 +15,9 @@ class CoherePage:
     def navigate_to_chat(self):
         self.page.goto(self.chatUrl)
 
-    def login(self, email: str, password: str):
-        self.page.locator("input[name='email']").fill(email)
-        self.page.locator("input[name='password']").fill(password)
+    def login(self):
+        self.page.locator("input[name='email']").fill(self.email)
+        self.page.locator("input[name='password']").fill(self.password)
         self.page.locator("button[type='submit']").click()
 
     def check_login_success(self):

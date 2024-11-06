@@ -1,9 +1,13 @@
 from playwright.sync_api import Page
+from conftest import config_data
 
 class DeepAIPage:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page,config: config_data):
         self.page = page
-        self.url = "https://deepai.org/"
+        self.url = config["deepai_url"]
+        self.profile_url = config["deepai_profile_url"]
+        self.email = config["deepai_email"]
+        self.password =config["deepai_password"]
 
     def accept_cookies(self):
         self.page.goto(self.url)
@@ -12,14 +16,14 @@ class DeepAIPage:
         accept_button.wait_for(state='visible')
         accept_button.click()
 
-    def login(self, email: str, password: str):
+    def login(self):
         self.page.locator("#headerLoginButton").click()
         login_panel = self.page.locator("button.button.login-with-email")
         login_panel.wait_for(state="visible")
         login_panel.click()
 
-        self.page.locator("input#user-email").fill(email)
-        self.page.locator("input#user-password").fill(password)
+        self.page.locator("input#user-email").fill(self.email)
+        self.page.locator("input#user-password").fill(self.password)
         self.page.locator("button#login-via-email-id").click()
 
         # Wait for the login modal to be hidden
@@ -40,7 +44,7 @@ class DeepAIPage:
         assert copy_button.is_visible(), "ChatBot should answer!"
 
     def change_profile_picture(self,file_path: str):
-        self.page.goto("https://deepai.org/dashboard/profile")
+        self.page.goto(self.profile_url)
 
         with self.page.expect_file_chooser() as fc_info:
             self.page.get_by_text("Choose an image").click() 
@@ -65,5 +69,5 @@ class DeepAIPage:
         logout_button.click()
 
         #Confirm user logged out
-        self.page.wait_for_url("https://deepai.org/")
-        assert self.page.url == "https://deepai.org/", "User should be redirected to the login page after logout"
+        self.page.wait_for_url(self.url)
+        assert self.page.url == self.url, "User should be redirected to the login page after logout"

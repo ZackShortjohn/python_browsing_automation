@@ -2,19 +2,19 @@ from tests.coherePage import CoherePage
 
 def test_login_via_ui(browser_context, config_data):
     page = browser_context.new_page()
-    cohere_page = CoherePage(page)
+    cohere_page = CoherePage(page, config_data)
 
     #Login
     cohere_page.navigate_to_login()
-    cohere_page.login(config_data["cohere_email"], config_data["cohere_password"])
+    cohere_page.login()
 
     #Check user logged in successfully
     cohere_page.check_login_success()    
 
-def test_chat_interaction(browser_context):
+def test_chat_interaction(browser_context, config_data):
 
     page = browser_context.new_page()
-    cohere_page = CoherePage(page)
+    cohere_page = CoherePage(page, config_data)
 
     #Navigate to ChatBot
     cohere_page.navigate_to_chat()
@@ -32,11 +32,11 @@ def test_chat_interaction(browser_context):
 
 def test_file_interaction(browser_context, config_data):
     page = browser_context.new_page()
-    cohere_page = CoherePage(page)
+    cohere_page = CoherePage(page, config_data)
 
     cohere_page.navigate_to_chat()
     #Login
-    cohere_page.login(config_data["cohere_email"], config_data["cohere_password"])
+    cohere_page.login()
 
     #Handle Popups
     cohere_page.accept_cookies()

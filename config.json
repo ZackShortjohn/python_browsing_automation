@@ -1,8 +1,10 @@
 {
     "cohere_url": "https://dashboard.cohere.com/welcome/login",
-    "cohere_email": "zkkontogiannis@gmail.com",
-    "cohere_password": "yourcode",
+    "cohere_chat_url": "https://dashboard.cohere.com/chat",
+    "cohere_email": "youremail",
+    "cohere_password": "yourpass",
     "deepai_url": "https://deepai.org/",
-    "deepai_email": "aqb24807@inohm.com",
-    "deepai_password": "yourcode"
+    "deepai_profile_url": "https://deepai.org/dashboard/profile",
+    "deepai_email": "aqb24807@inohm.com", 
+    "deepai_password": "yourpass"
 }
