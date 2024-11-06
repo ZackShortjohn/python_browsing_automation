@@ -1,4 +1,4 @@
-from conftestPage import CoherePage
+from tests.coherePage import CoherePage
 
 def test_login_via_ui(browser_context, config_data):
     page = browser_context.new_page()

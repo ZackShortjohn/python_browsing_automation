@@ -30,7 +30,7 @@ class CoherePage:
         # Check if there is a cookies popup and accept it.
         cookies = self.page.get_by_role("button", name="Accept All")
         try:
-            cookies.wait_for(state="visible",timeout=2000)  # Wait for the cookies button to be visible
+            cookies.wait_for(state="visible",timeout=5000)  # Wait for the cookies button to be visible
             cookies.click()
         except Exception:
             print("Cookies button not found or not visible.")
@@ -39,7 +39,7 @@ class CoherePage:
         # Check if there is a chat guide popup
         popup = self.page.locator("button[type='button']:has(i.icon-close)")
         try:
-            popup.wait_for(state="visible", timeout=2000)  # Wait for the popup close button to be visible
+            popup.wait_for(state="visible", timeout=5000)  # Wait for the popup close button to be visible
             popup.click()
             # Wait for the popup to be hidden
             self.page.locator("div[data-component='OnboardingModal']").wait_for(state="hidden", timeout=2000)
