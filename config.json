@@ -1,0 +1,8 @@
+{
+    "cohere_url": "https://dashboard.cohere.com/welcome/login",
+    "cohere_email": "youremail",
+    "cohere_password": "yourpass",
+    "deepai_url": "https://deepai.org/",
+    "deepai_email": "youremail",
+    "deepai_password": "yourpass"
+}
